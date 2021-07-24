@@ -43,10 +43,10 @@ stages {
  }
  stage('Sonarqube') {
     environment {
-        /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar = tool 'sonarqube'
+        /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar = tool 'sonar'
     }
     steps {
-        withSonarQubeEnv('sonarqube') {
+        withSonarQubeEnv('sonar') {
             sh "/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar/bin/sonar-scanner"
         }
   //      timeout(time: 10, unit: 'MINUTES') {

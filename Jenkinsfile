@@ -43,7 +43,7 @@ stages {
  }
  stage('Sonarqube') {
     environment {
-        /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar = tool 'sonar'
+        sonarHome = tool 'sonar'
     }
     steps {
         withSonarQubeEnv('sonar') {

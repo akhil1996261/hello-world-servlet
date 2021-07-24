@@ -45,8 +45,8 @@ stages {
       }
  }
  stage('Sonarqube') {
-    environment {
-        sonarHome = tool 'sonar'
+       environment {
+        FOO = "bar"
     }
     steps {
         withSonarQubeEnv('sonar') {

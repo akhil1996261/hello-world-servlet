@@ -1,7 +1,5 @@
 pipeline {
     agent any 
-   
-    }
     tools { 
         maven 'Maven' 
       
@@ -44,16 +42,16 @@ stages {
       }
  }
  stage('Sonarqube') {
-       environment {
-        
+    environment {
+        scannerHome = tool 'sonarqube'
     }
     steps {
-        withSonarQubeEnv('sonar') {
-            sh "/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar/bin/sonar-scanner"
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
         }
-  //      timeout(time: 10, unit: 'MINUTES') {
- //           waitForQualityGate abortPipeline: true
-  //      }
+          timeout(time: 10, unit: 'MINUTES') {
+              waitForQualityGate abortPipeline: true
+          }
     }
 }
      stage('Artifact upload') {
@@ -69,10 +67,10 @@ stages {
 }
 post {
         success {
-            mail to:"raknas000@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Build success"
+            mail to:"akhil.kanna26@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Build success"
         }
         failure {
-            mail to:"raknas000@gmail.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Build failed"
+            mail to:"akhil.kanna26@gmail.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Build failed"
         }
     }       
 }

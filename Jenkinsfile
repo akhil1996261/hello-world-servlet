@@ -1,7 +1,6 @@
 pipeline {
     agent any 
-    environment {
-     FOO = "bar"
+   
     }
     tools { 
         maven 'Maven' 
@@ -46,7 +45,7 @@ stages {
  }
  stage('Sonarqube') {
        environment {
-        FOO = "bar"
+        
     }
     steps {
         withSonarQubeEnv('sonar') {
